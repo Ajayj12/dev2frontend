@@ -1,52 +1,97 @@
 
 import background from "../Images/Group.jpg"
+import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
+import AuthService from "../services/AuthService";
 
 const UserLogin = () => {
+
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const navigate = useNavigate();
 
   let loginBody = {
     height: "100vh",
     width: "100%",
     backgroundImage:
-    `url(${background})`,
+      `url(${background})`,
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
-    backgroundPosition:"top",
-    color: "white", 
- };
+    backgroundPosition: "top",
+    color: "white",
+  };
+
+  function fnChange(event) {
+    let value = event.target.value;
+    switch (event.target.name) {
+      case "emailId":
+        setUsername(value)
+        break;
+      case "password":
+        setPassword(value)
+        break;
+    }
+  }
+
+  function fnLogin(e) {
+    e.preventDefault();
+console.log("logging.....")
+
+    var user = { emailId: '', password: '' };
+    user.emailId = username;
+    user.password = password;
+    AuthService.fnSignin(user)
+      .then(response => {
+        if (response == null) {
+          alert("You have not logged in");
+          navigate("/userlogin");
+        }
+        var token = response.data.accessToken;
+        var id = response.data.id
+        localStorage.setItem("token", token);
+        navigate("/ldashboard")
+        localStorage.setItem("id", id);
+        console.log(id)
+      })
+      .catch(error => {
+        alert("Wrong Credentials entered")
+      }, [])
+  }
 
   return (
     <div>
-      
+
       <div className="head">
-        <h2>SNITCH</h2>
+        <a href="/" style={{color:'black'}}><h2>STITCHCLUB</h2></a>
       </div>
-        <div className="backlogin" style={loginBody}>
-        <form>
-              <div className="f1">
+      <div className="backlogin" style={loginBody}>
+        <form onSubmit={fnLogin}>
+          <div className="f1">
 
-                <div class="main-text">
-                  <input type="username" class="no-outline" placeholder="Email"/>
-                  <input type="password" class="no-outline" placeholder="Password"/>
-                </div>
-                <button type="button" class="btn2">Login</button>
-                <br></br><br></br>
-                <h5>Don't have an account ?</h5><br></br>
+            <div class="main-text">
+              <input type="email" name="emailId" class="no-outline"  onChange={fnChange} placeholder="Email" />
+              <input type="password" name="password" class="no-outline"  onChange={fnChange} placeholder="Password" />
+            </div>
+            <button type="submit" class="btn2">Login</button>
+            <br></br><br></br>
+            <h5>Don't have an account ?</h5><br></br>
 
-                <p><a href="signup">Signup </a></p>
+            <p><a href="signup">Signup </a></p>
 
 
-              </div>
-             
-              
-              
+          </div>
+
+
+
           {/* </div> */}
         </form>
-        </div>
-           
       </div>
-    
-    
 
-)
+    </div>
+
+
+
+  )
 }
 export default UserLogin;

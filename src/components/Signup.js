@@ -28,7 +28,7 @@ const Signup = () => {
                                 <input type="text" class="no-outline" placeholder="Full Name" />
                                 <input type="password" class="no-outline" placeholder="Password" />
                                 <input type="text" class="no-outline" placeholder="Mobile" />
-                                <input type="text" class="no-outline" placeholder="Address" />
+                                
 
 
                             </div>

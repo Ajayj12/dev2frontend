@@ -6,7 +6,8 @@ import three from '../Images/three.jpg'
 import four from '../Images/four.jpg'
 import { useEffect, useState } from "react";
 import axios from "axios";
-const DashBoard = () => {
+import Lheader from "./Lheader";
+const LdashBoard = () => {
 
     let da1 = {
         height: "100vh",
@@ -117,7 +118,7 @@ const DashBoard = () => {
 
 return(
 <div>
-    <Header/>
+    <Lheader/>
 
     <div className="d1" style={da1}> .</div>
     <div className="b1">
@@ -131,9 +132,11 @@ return(
             <div key={index} className="col-md-3 pd">
                 <img src={prod.image} alt={prod.name} />
                 <br />
-                <p>{prod.name}</p>
+                <p>{prod.name} &nbsp; <a ><i class="fa fa-heart icon"></i></a></p>
+                
                 <p>${prod.amount}</p>
-                {/* <p>Units Left: {prod.stock}</p> */}
+                <p>Units Left: {prod.stock}</p>
+                <p style={{color:'red'}}><a href="cart" >Add to &nbsp;<i class="fa fa-opencart icon"></i></a></p>
             </div>
         ))}
         {products1.map((prod, index) => (
@@ -192,4 +195,4 @@ return(
 </div>
 )
 }
-export default DashBoard;
+export default LdashBoard;

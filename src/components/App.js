@@ -7,6 +7,8 @@ import UserLogin from './UserLogin';
 import Signup from './Signup';
 import Header from './Header';
 import DashBoard from './DashBoard';
+import AdminLogin from './AdminLogin';
+import LdashBoard from './LdashBoard';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
        <Route path='/signup' element={<Signup/>}/>
        <Route path='header' element = {<Header/>}/>
        <Route path='/' element={<DashBoard/>}/>
+       <Route path='/adminlogin' element={<AdminLogin/>}/>
+       <Route path='/ldashboard' element={<LdashBoard/>}/>
       </Routes>
       </BrowserRouter>
       
