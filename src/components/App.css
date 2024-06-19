@@ -384,3 +384,23 @@ button:hover{
   text-align: left;
 }
 
+.r2 .pd img{
+  margin-top: 100px;
+  padding: 20px;
+  height: 500px;
+  width: 400px;
+}
+
+.r2 .pf{
+  margin: 100px;
+  padding: 20px;
+  text-align: justify;
+}
+
+.r2 .pf p{
+  color: black;
+  
+}
+.r2 .pf a{
+  color: red;
+}

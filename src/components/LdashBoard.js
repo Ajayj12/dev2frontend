@@ -1,12 +1,10 @@
 import Header from "./Header";
 import threemen from '../Images/threemen.jpg';
-import one from '../Images/one.jpg'
-import second from '../Images/second.jpg'
-import three from '../Images/three.jpg'
-import four from '../Images/four.jpg'
+import { UseProduct } from "./ProductContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Lheader from "./Lheader";
+import { useNavigate } from "react-router-dom";
 const LdashBoard = () => {
 
     let da1 = {
@@ -24,7 +22,8 @@ const LdashBoard = () => {
     const[prodCate, setProdCategory] = useState([]);
     const[categoryId, setCategory] = useState(0);
     const[all,setAll] = useState([]);
-
+    
+    const navigate = useNavigate();
 
 
 
@@ -103,10 +102,28 @@ const LdashBoard = () => {
     }
 
     
+    const {setProduct} = UseProduct();
+
+    const handleByProduct = (newProduct) =>{
+        // console.log(newProductId);
+        // setProductId(newProductId);
+        console.log(newProduct)
+        setProduct(newProduct);
+        console.log(newProduct);
+        navigate("/productpage")
+    }
 
     
 
-
+    useEffect(() => {
+        //check if token is there or not..
+        var token = localStorage.getItem("token");
+        if (token == null) {
+            navigate("/userlogin");
+    
+            return;
+        }
+    })
 
     useEffect(() =>{
         fnGetProducts();
@@ -130,20 +147,20 @@ return(
     <div className="row r1">
         {products.map((prod, index) => (
             <div key={index} className="col-md-3 pd">
-                <img src={prod.image} alt={prod.name} />
+                <a onClick={() => handleByProduct(prod)}><img src={prod.image} alt={prod.name} /></a>
                 <br />
-                <p>{prod.name} &nbsp; <a ><i class="fa fa-heart icon"></i></a></p>
+                <p style={{fontWeight:'400'}}>{prod.name} &nbsp; <a ><i class="fa fa-heart icon"></i></a></p>
                 
                 <p>${prod.amount}</p>
                 <p>Units Left: {prod.stock}</p>
-                <p style={{color:'red'}}><a href="cart" >Add to &nbsp;<i class="fa fa-opencart icon"></i></a></p>
+                {/* <p style={{color:'red'}}><a  >Add to &nbsp;<i class="fa fa-opencart icon"></i></a></p> */}
             </div>
         ))}
         {products1.map((prod, index) => (
             <div key={index} className="col-md-3 pd">
-                <img src={prod.image} alt={prod.name} />
+                <a onClick={() => handleByProduct(prod.id)}><img src={prod.image} alt={prod.name} /></a>
                 <br />
-                <p>{prod.name}</p>
+                <p style={{fontWeight:'400'}}>{prod.name}</p>
                 <p>${prod.amount}</p>
                 <p>Units Left: {prod.stock}</p>
             </div>
@@ -162,9 +179,9 @@ return(
         <div className="row r1">
         {prodCate.map((prod, index) => (
             <div key={index} className="col-md-3 pd">
-                <img src={prod.image} alt={prod.name} />
+                <a onClick={() => handleByProduct(prod.id)}><img src={prod.image} alt={prod.name} /></a>
                 <br />
-                <p>{prod.name}</p>
+                <p style={{fontWeight:'400'}}>{prod.name}</p>
                 <p>${prod.amount}</p>
                 <p>Units Left: {prod.stock}</p>
             </div>
@@ -181,9 +198,9 @@ return(
         <div className="row r1">
         {all.map((prod, index) => (
             <div key={index} className="col-md-3 pd">
-                <img src={prod.image} alt={prod.name} />
+                <a onClick={() => handleByProduct(prod.id)}><img src={prod.image} alt={prod.name} /></a>
                 <br />
-                <p>{prod.name}</p>
+                <p style={{fontWeight:'400'}}>{prod.name}</p>
                 <p>${prod.amount}</p>
                 <p>Units Left: {prod.stock}</p>
             </div>

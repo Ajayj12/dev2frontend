@@ -9,6 +9,8 @@ import Header from './Header';
 import DashBoard from './DashBoard';
 import AdminLogin from './AdminLogin';
 import LdashBoard from './LdashBoard';
+import PlaceOrder from './ProductPage';
+import ProductPage from './ProductPage';
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
        <Route path='/' element={<DashBoard/>}/>
        <Route path='/adminlogin' element={<AdminLogin/>}/>
        <Route path='/ldashboard' element={<LdashBoard/>}/>
+       <Route path='/productpage' element={<ProductPage/>}/>
       </Routes>
       </BrowserRouter>
       

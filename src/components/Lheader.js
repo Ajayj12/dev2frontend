@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import './App.css';
 import myImage from '../Images/S.jpg'
+import { useNavigate } from "react-router-dom";
 const Lheader =()=>{
 
     const[sidebarOpen, setSidebar] = useState(false);
 
-    
 
+    const navigate = useNavigate();
+    
+    function handleLogOut() {
+        localStorage.clear();
+        // alert(localStorage.getItem("token"));
+        navigate("/login");
+    }
     const handleSideBar = () =>{
         setSidebar(!sidebarOpen);
     }
@@ -41,7 +48,7 @@ const Lheader =()=>{
                 <a href="trackOrder">TRACK ORDER</a>
                 <a href="store">VISIT STORE</a>
                 <a href="support">SUPPORT</a>
-                <a href="userlogin">LOG OUT</a>
+                <a href="userlogin" onClick={handleLogOut}>LOG OUT</a>
             </div>
             </div>
             
